@@ -1,11 +1,12 @@
+#include <Streaming.h>
+
 void updateSensors(void) {
 
-	double sensorA_offset = 7;
-	double sensorB_offset = 7;
+	double sensorA_offset = 0;
+//	double sensorB_offset = 0;
 
 	sensorA = readSensor(0) + sensorA_offset;
-	sensorB = readSensor(1) + sensorB_offset;
-
+//	sensorB = readSensor(1) + sensorB_offset;
 }
 
 // 0 = Sensor A
@@ -17,6 +18,7 @@ double readSensor(uint8_t sensor) {
 
 	if (sensor == 0) {
 		temperature = thermocouple_A.readCelsius();
+		Serial << "[Temperature] sensor a: " << temperature << endl;
 		readings_A[readIndex_A] = temperature;
 
 		readIndex_A++;

@@ -329,13 +329,12 @@ void handleRoot2() {
 
 void loop() {
 
-	updateSensors();
-
 	// Call the timer dispatchers
 	dispatchers();
 
 	// Start Pid Control
-	Input = (sensorA + sensorB) / 2;
+//	Input = (sensorA + sensorB) / 2;
+	Input = sensorA;
 
 	myPID.Compute();
 
@@ -389,6 +388,6 @@ void dispatchers(void) {
 
 void dispatchSecond(void) {
 	// We may use this for debug output
-
+	updateSensors();
 }
 
