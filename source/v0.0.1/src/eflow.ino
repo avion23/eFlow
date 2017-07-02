@@ -15,6 +15,7 @@
   BSD license, all text above must be included in any redistribution
  ****************************************************/
 
+#include <Arduino.h>
 #include <SPI.h>
 #include <PID_v1.h>
 #include "Jm_MAX31855.h"
