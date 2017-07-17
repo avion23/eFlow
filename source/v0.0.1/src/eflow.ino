@@ -100,7 +100,7 @@ double Kp = 40.0, Ki = 0.01, Kd = 5;
 double Kp_agressive = 999.0, Ki_agressive = 0.01, Kd_agressive = 0;
 PID myPID(&Input, &Output, &Setpoint, Kp, Ki, Kd, DIRECT);
 
-uint16_t startup_sec = 90; // Default 90
+uint16_t startup_sec = 240; // Default 90
 uint16_t startup_temp = 80;
 
 int WindowSize = 1000; //
