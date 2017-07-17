@@ -22,12 +22,12 @@ void loadDefaults( void ) {
   // Set default IP address
   settings.ipAddress[0] = 192;
   settings.ipAddress[1] = 168;
-  settings.ipAddress[2] = 1;
+  settings.ipAddress[2] = 178;
   settings.ipAddress[3] = 100;
 
   settings.ipGateway[0] = 192;
   settings.ipGateway[1] = 168;
-  settings.ipGateway[2] = 1;
+  settings.ipGateway[2] = 178;
   settings.ipGateway[3] = 1;
 
   settings.ipSubnet[0] = 255;
