@@ -22,19 +22,16 @@
 
 class deltaSigma {
 public:
+	/** @param: when is a full cycle finished? e.g. 100 percent = 100
+	 */
 	deltaSigma(unsigned int delta) :
 			integrator(0), threshold(delta) {
-
 	}
-	bool update(unsigned int percent) {
-		integrator += percent;
-		if (integrator >= threshold) {
-			integrator -= threshold;
-			return true;
-		} else {
-			return false;
-		}
-	}
+	/** updates the delta sigma converter with a new value and fetches the next state
+	 * @param the current desired percent valueb
+	 * @return true if the threshold has been reached, false otherwise
+	 */
+	bool update(unsigned int percent);
 
 private:
 	unsigned int integrator;
