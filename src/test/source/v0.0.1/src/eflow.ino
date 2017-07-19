@@ -114,9 +114,6 @@ float sensorB = 0;
 
 float sensorTemperature = 0;
 
-unsigned long previousMillis1000 = 0;
-unsigned long previousMillis100 = 0;
-
 bool heaterDuty[10] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 int8_t heaterDutyIndex = -1;
 
@@ -368,11 +365,14 @@ void loop() {
 }
 
 void dispatchers(void) {
+	static unsigned long previousMillis1000;
+	static unsigned long previousMillis100;
+	static unsigned long previousMillis20;
+
 	// Call dispatchSecond once a second
 	unsigned long currentMillis1000 = millis();
 	if (currentMillis1000 - previousMillis1000 >= 1000) {
 		previousMillis1000 = currentMillis1000;
-
 		dispatchSecond();
 		dispatchProcessPerSecond();
 	}
@@ -381,13 +381,24 @@ void dispatchers(void) {
 	unsigned long currentMillis100 = millis();
 	if (currentMillis100 - previousMillis100 >= 100) {
 		previousMillis100 = currentMillis100;
-
 		dispatch100ms();
 	}
+
+	// Call dispatch100ms every 20ms
+	unsigned long currentMillis20 = millis();
+	if (currentMillis20 - previousMillis20 >= 20) {
+		previousMillis20 = currentMillis20;
+		dispatch20ms();
+	}
+
 }
 
 void dispatchSecond(void) {
 	// We may use this for debug output
 	updateSensors();
+}
+
+void dispatch100ms(void){
+
 }
 
