@@ -121,7 +121,7 @@ float Power = 0;
  */
 uint8_t processEnable = 0;
 
-uint16_t safeTemperature = 50; // Don't allow oven to be enabled unless it first cools to this temperature
+uint16_t safeTemperature = 400; // Don't allow oven to be enabled unless it first cools to this temperature
 
 struct reflowStatsProfile_t {
 	uint16_t sensorA;  // Reserved
@@ -372,14 +372,12 @@ void dispatchers(void) {
 		dispatchProcessPerSecond();
 	}
 
-	// Call dispatch100ms every 100ms (1/10 sec)
 	unsigned long currentMillis100 = millis();
 	if (currentMillis100 - previousMillis100 >= 100) {
 		previousMillis100 = currentMillis100;
 		dispatch100ms();
 	}
 
-	// Call dispatch100ms every 20ms
 	unsigned long currentMillis10 = millis();
 	if (currentMillis10 - previousMillis10 >= 10) {
 		previousMillis10 = currentMillis10;

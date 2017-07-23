@@ -6,8 +6,11 @@ void dispatch10ms(void) {
 		if (d.update(Output / 10)) {
 			digitalWrite(SSR_OUTPUT, true);
 			delay(2);
+		} else {
+			digitalWrite(SSR_OUTPUT, false);
 		}
+	} else {
+		digitalWrite(SSR_OUTPUT, false);
 	}
-	digitalWrite(SSR_OUTPUT, false);
 }
 
