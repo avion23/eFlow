@@ -243,7 +243,6 @@ void dispatchProcessPerSecond() {
 
 		reflowStats.profile[processTimer].time = processTimer;
 		reflowStats.profile[processTimer].sensorA = sensorA * 100;
-//    reflowStats.profile[processTimer].sensorB = sensorB * 100;
 		reflowStats.profile[processTimer].Setpoint = Setpoint;
 		reflowStats.profile[processTimer].reflowTime = processReflowTimer;
 
