@@ -1,9 +1,8 @@
 /*
- * deltaSigma.cpp
+ * deltaSigmaTestWhiteBox.hpp
  *
- *  Created on: Jul 18, 2017
- *      Author: ralf
- *
+ *  Created on: Jul 23, 2017
+ *      Author: Ralf Waldukat
  *
  Copyright (c) 2017, Ralf Waldukat
  All rights reserved.
@@ -17,24 +16,31 @@
 
  */
 
-#include <deltaSigma.hpp>
+#ifndef SRC_TEST_DELTASIGMATESTWHITEBOX_HPP_
+#define SRC_TEST_DELTASIGMATESTWHITEBOX_HPP_
 
-bool deltaSigma::update(unsigned int percent) {
-	bool returnValue = false;
-	integrator += percent;
-	if (integrator >= threshold && dcPressure * polarity <= 1) {
-		integrator -= threshold;
-		returnValue = true;
+#include "deltaSigma.hpp"
+#include "doctest.h"
+#include <iostream>
+
+/* I was really fed up with trying to understand why my Implementation didn't work
+ * I needed a way to consistently log the unit under tests behaviour. At the same time,
+ * I didn't want to pollute the class with debug statements
+ * This is why I implemented deltaSigmaWhiteBoxTest. It uses the functionality
+ * of the base class and adds some std::cout output. You can safely ignore or delete
+ * this class in case you ever change the implementation.
+ */
+class deltaSigmaWhiteBoxTest: deltaSigma {
+	using deltaSigma::deltaSigma;	// delegate
+public:
+	bool update(unsigned int percent) {
+
+		std::cout << "integrator = " << integrator << "\t polarity = "
+				<< polarity << "\t dcPressure = " << dcPressure;
+		bool retValue = deltaSigma::update(percent);
+		std::cout << "\t result = " << retValue << std::endl;
+		return retValue;
 	}
-	if (dcFreeFeature) { // keep dcPressure at 0 otherwise
-		if (returnValue) {
-			if (polarity > 0)
-				dcPressure++;
-			else {
-				dcPressure--;
-			}
-		}
-		polarity *= -1;
-	}
-	return returnValue;
-}
+};
+
+#endif /* SRC_TEST_DELTASIGMATESTWHITEBOX_HPP_ */

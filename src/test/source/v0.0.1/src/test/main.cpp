@@ -7,5 +7,6 @@
 
 // list all test files here
 #include "deltaSigmaTest.hpp"
+#include "ssrControlTest.hpp"
 
 #endif
