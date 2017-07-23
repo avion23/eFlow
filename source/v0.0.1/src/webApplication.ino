@@ -303,7 +303,7 @@ void handleProcessData() {
 
 	String message = "";
 
-	message += "\"Time\",\"Temperature\",\"Set Point\"\n";
+	message += "\"Time\",\"Temperature\",\"Set Point\",\"Power\"\n";
 
 	for (int i = 0; i < reflowStatsProfileLength; i = i + 2) {
 
@@ -316,7 +316,8 @@ void handleProcessData() {
 		}
 
 		message += String(i) + "," + String(temperature) + ","
-				+ String(reflowStats.profile[i].Setpoint) + "\n";
+				+ String(reflowStats.profile[i].Setpoint) + "," + String(Power)
+				+ "\n";
 	}
 
 //    reflowStats.profile[processTimer].time = processTimer;
