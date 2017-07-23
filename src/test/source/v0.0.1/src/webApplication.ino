@@ -309,15 +309,12 @@ void handleProcessData() {
 
 		float temperature = 0;
 
-//    if (reflowStats.profile[i].sensorA == 0 || reflowStats.profile[i].sensorB == 0) {
 		if (reflowStats.profile[i].sensorA == 0) {
 			temperature = 0;
 		} else {
-//      temperature = ( float(reflowStats.profile[i].sensorA + reflowStats.profile[i].sensorB) / 100 / 2 ) ;
 			temperature = (float(reflowStats.profile[i].sensorA) / 100);
 		}
 
-//    message += String(i) + "," + "," + String(reflowStats.profile[i].reflowTime) + "," + String(temperature) + "," + String(reflowStats.profile[i].Setpoint) + "\n";
 		message += String(i) + "," + String(temperature) + ","
 				+ String(reflowStats.profile[i].Setpoint) + "\n";
 	}
@@ -519,7 +516,7 @@ void handleJSONSensors() {
 	message += "{\n";
 	message += "  \"data\" : {\n";
 	message += "    \"sensorA\" : " + String(float(sensorA)) + ",\n";
-//  message += "    \"sensorB\" : " + String(float(sensorB)) + ",\n";
+	message += "    \"Power\" : " + String(float(Power)) + ",\n";
 	message += "    \"processTimer\" : " + String(processTimer) + ",\n";
 	message += "    \"processReflowTimer\" : " + String(processReflowTimer)
 			+ ",\n";
@@ -559,8 +556,8 @@ void handleReflowChart() {
 	message += "    res=JSON.parse(res);\n";
 	message += "    if(res.status=='ok'){\n";
 	message += "    document.chartForm.sensorA.value = res.data.sensorA;\n";
-//  message += "    document.chartForm.sensorB.value = res.data.sensorB;\n";
 	message += "    document.chartForm.Setpoint.value = res.data.Setpoint;\n";
+	message += "    document.chartForm.OutputPower.value = res.data.Power;\n";
 	message +=
 			"    document.chartForm.processTimer.value = res.data.processTimer;\n";
 	message +=

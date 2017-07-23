@@ -107,15 +107,12 @@ int WindowSize = 1000; //
 unsigned long windowStartTime;
 
 float readings_A[numReadings];      // the readings from the analog input
-float readings_B[numReadings];      // the readings from the analog input
 
 float sensorA = 0;
-float sensorB = 0;
 
 float sensorTemperature = 0;
 
-bool heaterDuty[10] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-int8_t heaterDutyIndex = -1;
+float Power = 0;
 
 /*
  * 0 = Nothing going on
@@ -325,16 +322,14 @@ void handleRoot2() {
 }
 
 void loop() {
-
-	// Call the timer dispatchers
-	dispatchers();
+	dispatchers(); 	// Call the timer dispatchers
 
 	// Start Pid Control
 //	Input = (sensorA + sensorB) / 2;
 	Input = sensorA;
 
 	myPID.Compute();
-
+	Power = Output / 10;
 	// Handle TCP Server
 	server.handleClient();
 	dnsServer.processNextRequest();
@@ -367,7 +362,7 @@ void loop() {
 void dispatchers(void) {
 	static unsigned long previousMillis1000;
 	static unsigned long previousMillis100;
-	static unsigned long previousMillis20;
+	static unsigned long previousMillis10;
 
 	// Call dispatchSecond once a second
 	unsigned long currentMillis1000 = millis();
@@ -385,10 +380,10 @@ void dispatchers(void) {
 	}
 
 	// Call dispatch100ms every 20ms
-	unsigned long currentMillis20 = millis();
-	if (currentMillis20 - previousMillis20 >= 20) {
-		previousMillis20 = currentMillis20;
-		dispatch20ms();
+	unsigned long currentMillis10 = millis();
+	if (currentMillis10 - previousMillis10 >= 10) {
+		previousMillis10 = currentMillis10;
+		dispatch10ms();
 	}
 
 }
@@ -398,7 +393,7 @@ void dispatchSecond(void) {
 	updateSensors();
 }
 
-void dispatch100ms(void){
+void dispatch100ms(void) {
 
 }
 
