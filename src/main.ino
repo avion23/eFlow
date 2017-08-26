@@ -1,11 +1,11 @@
 #include <Arduino.h>	// this is necessary for streaming, strings, vectors and has to be first
-#include <espLogger.h>
+#include <logger/espLogger.h>
 //#include <myMqtt.h>
 #include <ota.h>
 #include <Ticker.h>
 #include <string>
 #include <Streaming.h>
-#include <telnetServer.h>
+#include <logger/telnetServer.h>
 #include <udpserver.h>
 #include <wifi.h>
 

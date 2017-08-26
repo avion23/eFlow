@@ -12,7 +12,7 @@
 #include <iostream>
 #endif
 
-#include <telnetServer.h>
+#include <logger/telnetServer.h>
 
 // logging class which outputs logs to all possible sinks
 class espLogger {

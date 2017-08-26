@@ -8,7 +8,7 @@
 #ifndef SRC_TEST_LOGGERTEST_H_
 #define SRC_TEST_LOGGERTEST_H_
 
-#include <espLogger.h>
+#include <logger/espLogger.h>
 #include "doctest.h"
 
 TEST_CASE("simple"){

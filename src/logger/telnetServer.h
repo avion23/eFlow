@@ -10,7 +10,7 @@
 
 #include <ESP8266WiFi.h>
 #include <Arduino.h>
-#include <telnetServer.h>
+#include <logger/telnetServer.h>
 #include <WiFiServer.h>
 #include <vector>
 #include <Streaming.h>
