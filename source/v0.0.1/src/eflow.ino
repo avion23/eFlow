@@ -31,6 +31,7 @@
 
 #include <WiFiUdp.h>
 #include <ArduinoOTA.h>
+#include "ISR.h"
 
 // Configuration Start
 
@@ -42,6 +43,15 @@ const uint8_t ledHTTP = 0;     // Toggled on HTTP Status
 const uint8_t ledCONNECTED = 2; // Toggled on when AP connected
 
 const uint8_t SSR_OUTPUT = 13; // This is where the SSR is connected
+const uint8_t ZERO_CROSSING_INPUT = 14;	// pin to sense the zero crossing
+// Pins for thermocouples
+const auto DO = 4;
+const auto CS_A = 12;
+const auto CLK = 5;
+
+MAX6675 thermocouple_A(CLK, CS_A, DO);
+//Jm_MAX31855 thermocouple_A(CLK, CS_A, DO);
+//Jm_MAX31855 thermocouple_B(CLK, CS_B, DO);
 
 // End Pin Assignment
 
@@ -71,16 +81,6 @@ unsigned long ledHTTPStateMills = 0;
 long ledHTTPStateInterval = 250; // How fast to blink the LED
 
 unsigned long secretRandNumber; // We will generate a new secret on startup.
-
-// Pins for thermocouples
-#define DO         4
-#define CS_A       12
-#define CS_B       14
-#define CLK        5
-
-MAX6675 thermocouple_A(CLK, CS_A, DO);
-//Jm_MAX31855 thermocouple_A(CLK, CS_A, DO);
-//Jm_MAX31855 thermocouple_B(CLK, CS_B, DO);
 
 const int numReadings = 5;
 int readIndex_A = 0;                // the index of the current reading
@@ -167,6 +167,7 @@ void setup() {
 
 	pinMode(SSR_OUTPUT, OUTPUT);
 	pinMode(key_flash, INPUT_PULLUP);
+	pinMode(ZERO_CROSSING_INPUT, INPUT);
 
 	//-- Start PID Setup
 	windowStartTime = millis();
@@ -315,6 +316,7 @@ void setup() {
 	});
 	ArduinoOTA.begin();
 
+	initISR();
 }
 
 void handleRoot2() {
@@ -395,3 +397,27 @@ void dispatch100ms(void) {
 
 }
 
+void dispatch10ms(void) {
+
+}
+
+void initISR() {
+	// this should be a sine wave and is highly hardware dependend
+	// The PIN is pulled low through the optocoupler when the
+	// voltage is at it's maximum.
+	// a falling edge means that maximum is reached.
+	// a rising edge means that the maximum has just passed and we are before the zero crossing
+//	attachInterrupt(ZERO_CROSSING_INPUT, zeroCrossingISR, RISING);
+
+}
+
+void zeroCrossingISR() {
+	static deltaSigma d(100);	// convert percent to bits
+	processEnable = true;
+	Output = 25;
+	if (processEnable && d.update(Output / 10)) {
+		digitalWrite(SSR_OUTPUT, true);
+		delay(1);
+	}
+	digitalWrite(SSR_OUTPUT, false);
+}

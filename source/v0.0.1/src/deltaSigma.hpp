@@ -28,16 +28,10 @@
 class deltaSigma {
 public:
 	/** @param: when is a full cycle finished? e.g. 100 percent = 100
-	 */
-	deltaSigma(unsigned int delta) :
-			deltaSigma(delta, false) {
-	}
-
-	/** @param: when is a full cycle finished? e.g. 100 percent = 100
 	 *  @param true if this should be without DC
 	 *  @warning this feature introduces a delay
 	 */
-	deltaSigma(unsigned int max, bool dcFree) :
+	deltaSigma(unsigned int max, bool dcFree = false) :
 			integrator(0), threshold(max), dcFreeFeature(dcFree), dcPressure(
 					0), polarity(1) {
 	}
