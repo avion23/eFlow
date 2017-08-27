@@ -14,7 +14,6 @@
 
 #include <logger/telnetServer.h>
 
-espLogger logger;
 
 // logging class which outputs logs to all possible sinks
 class espLogger {
@@ -50,5 +49,8 @@ private:
 	const std::string prefix;
 	telnetServer telnet;
 };
+
+espLogger logger;
+
 
 #endif /* SRC_ESPLOGGER_H_ */
