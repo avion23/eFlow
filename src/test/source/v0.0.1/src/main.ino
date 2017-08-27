@@ -32,6 +32,11 @@
 #include <WiFiUdp.h>
 #include <ArduinoOTA.h>
 #include "ISR.h"
+#include "logger/espLogger.h"
+
+#include <DNSServer.h>            //Local DNS Server used for redirecting all requests to the configuration portal
+#include <ESP8266WebServer.h>     //Local WebServer used to serve the configuration portal
+#include <WiFiManager.h>          //https://github.com/tzapu/WiFiManager WiFi Configuration Magic
 
 // Configuration Start
 
@@ -238,24 +243,15 @@ void setup() {
 		Serial.print("Connecting to SSID : ");
 		Serial.println(settings.ssid);
 
-		WiFi.begin(settings.ssid, settings.ssidPassword);
-		WiFi.mode(WIFI_STA);
+		static WiFiManager wifiManager;
+		wifiManager.setDebugOutput(true);
 
-		// Documentation says this is supposed to come before WiFi.begin, but when it is there -- it doesn't work. WHY?!?!?!
-		if (settings.ipMode == 1) { // 0 = Dynamic, 1 = Static
-			WiFi.config(settings.ipAddress, settings.ipGateway,
-					settings.ipSubnet);
-		}
-
-		//Serial.println ( "" );
-
-		//EEPROM_readAnything(0, settings);
-
-		// Wait for connection
-		while (WiFi.status() != WL_CONNECTED) {
-			delay(500);
-			Serial.print(".");
-		}
+		wifiManager.setAPCallback(
+				[](WiFiManager *myWiFiManager) {
+					Serial << "[Wifimanager] Entered config mode. IP: " << WiFi.softAPIP() << endl;
+					Serial << "[Wifimanager] my SSID: " << myWiFiManager->getConfigPortalSSID() << endl;
+				});
+		wifiManager.autoConnect();
 
 		digitalWrite(ledCONNECTED, 1);
 
@@ -317,6 +313,7 @@ void setup() {
 	ArduinoOTA.begin();
 
 	initISR();
+	logger << "[SYS] boot finished" << endl;
 }
 
 void handleRoot2() {
@@ -391,6 +388,9 @@ void dispatchers(void) {
 void dispatchSecond(void) {
 	// We may use this for debug output
 	updateSensors();
+	logger << "[SENSOR] " <<  sensorA  << "°C" << endl;
+	logger << "[PID] " << Power << "%" << endl;
+
 }
 
 void dispatch100ms(void) {
