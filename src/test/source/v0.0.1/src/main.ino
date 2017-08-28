@@ -90,7 +90,6 @@ unsigned long secretRandNumber; // We will generate a new secret on startup.
 
 const int numReadings = 5;
 int readIndex_A = 0;                // the index of the current reading
-int readIndex_B = 0;                // the index of the current reading
 
 //Input: The variable we're trying to control (double)
 //Output: The variable that will be adjusted by the pid (double)
