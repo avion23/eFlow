@@ -305,7 +305,7 @@ void processStop(void) {
 	processEnable = 0;
 	processTempReached = 0;
 	Setpoint = 0;
-	digitalWrite(SSR_OUTPUT, 0); // Make sure SSR is turned off!
+	digitalWrite(PIN_SSR_OUTPUT, 0); // Make sure SSR is turned off!
 
 	processTimer = 0;
 	processReflowTimer = 0;

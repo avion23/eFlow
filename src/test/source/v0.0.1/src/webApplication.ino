@@ -1,7 +1,7 @@
 //char tempArray[5000];
 
 void handleExternalScriptJS() {
-	digitalWrite(ledHTTP, 1);
+	digitalWrite(PIN_HTTP_LED, 1);
 
 	String externJavascriptString =
 			F(
@@ -45,22 +45,22 @@ void handleExternalScriptJS() {
 		server.send(200, "text/plain", externJavascriptString);
 	}
 
-	digitalWrite(ledHTTP, 0);
+	digitalWrite(PIN_HTTP_LED, 0);
 }
 
 void handleRoot() {
-	digitalWrite(ledHTTP, 1);
+	digitalWrite(PIN_HTTP_LED, 1);
 
 	String message = "";
 	message += "Welcome to eFlow\n";
 
 	server.send(200, "text/html", message);
-	digitalWrite(ledHTTP, 0);
+	digitalWrite(PIN_HTTP_LED, 0);
 
 }
 
 void handleProcessStart() {
-	digitalWrite(ledHTTP, 1);
+	digitalWrite(PIN_HTTP_LED, 1);
 
 	String message = "";
 	message +=
@@ -69,7 +69,7 @@ void handleProcessStart() {
 	message += "Reflow process has been initiated... This page will refresh\n";
 
 	server.send(200, "text/html", message);
-	digitalWrite(ledHTTP, 0);
+	digitalWrite(PIN_HTTP_LED, 0);
 	systemMessage = "eFlow Initiated";
 
 	processGo();
@@ -77,7 +77,7 @@ void handleProcessStart() {
 }
 
 void handleProcessConfigure() {
-	digitalWrite(ledHTTP, 1);
+	digitalWrite(PIN_HTTP_LED, 1);
 
 	String message = "";
 	message += "<html xmlns='http://www.w3.org/1999/xhtml'>\n";
@@ -223,7 +223,7 @@ void handleProcessConfigure() {
 	message += "</html>\n";
 
 	server.send(200, "text/html", message);
-	digitalWrite(ledHTTP, 0);
+	digitalWrite(PIN_HTTP_LED, 0);
 
 	//processGo();
 
@@ -259,7 +259,7 @@ void handleProcessConfigureSaveGlobal() {
 }
 
 void handleProcessStop() {
-	digitalWrite(ledHTTP, 1);
+	digitalWrite(PIN_HTTP_LED, 1);
 
 	String message = "";
 	message += "  <link rel=\"stylesheet\" href=\"/eflow.css\">\n";
@@ -268,17 +268,17 @@ void handleProcessStop() {
 	message += "Process aborted... This page will refresh\n";
 
 	server.send(200, "text/html", message);
-	digitalWrite(ledHTTP, 0);
+	digitalWrite(PIN_HTTP_LED, 0);
 
 	systemMessage = "eFlow Aborted";
 
 	processStop();
-	digitalWrite(ledHTTP, 0);
+	digitalWrite(PIN_HTTP_LED, 0);
 
 }
 
 void handleSystemRestart() {
-	digitalWrite(ledHTTP, 1);
+	digitalWrite(PIN_HTTP_LED, 1);
 
 	String message = "";
 	message += "  <link rel=\"stylesheet\" href=\"/eflow.css\">\n";
@@ -291,7 +291,7 @@ void handleSystemRestart() {
 	processStop();
 
 	delay(5000);
-	digitalWrite(ledHTTP, 0);
+	digitalWrite(PIN_HTTP_LED, 0);
 
 	ESP.restart(); // For some reason the restart function isn't working.
 	//while (1) { };   // Let's force the watchdog to restart eFlow.
@@ -299,7 +299,7 @@ void handleSystemRestart() {
 }
 
 void handleProcessData() {
-	digitalWrite(ledHTTP, 1);
+	digitalWrite(PIN_HTTP_LED, 1);
 
 	String message = "";
 
@@ -326,12 +326,12 @@ void handleProcessData() {
 //    reflowStats.profile[processTimer].Setpoint = Setpoint;
 
 	server.send(200, "text/csv", message);
-	digitalWrite(ledHTTP, 0);
+	digitalWrite(PIN_HTTP_LED, 0);
 
 }
 
 void handleNotFound() {
-	digitalWrite(ledHTTP, 1);
+	digitalWrite(PIN_HTTP_LED, 1);
 
 	String message = "File Not Found\n\n";
 	message += "URI: ";
@@ -347,11 +347,11 @@ void handleNotFound() {
 	}
 
 	server.send(404, "text/plain", message);
-	digitalWrite(ledHTTP, 1);
+	digitalWrite(PIN_HTTP_LED, 1);
 }
 
 void handleCSS() {
-	digitalWrite(ledHTTP, 1);
+	digitalWrite(PIN_HTTP_LED, 1);
 
 	String message = "";
 	message += F("@charset \"UTF-8\";\n");
@@ -430,11 +430,11 @@ void handleCSS() {
 
 	server.send(200, "text/css", message);
 
-	digitalWrite(ledHTTP, 0);
+	digitalWrite(PIN_HTTP_LED, 0);
 }
 
 void handleReflowNav() {
-	digitalWrite(ledHTTP, 1);
+	digitalWrite(PIN_HTTP_LED, 1);
 
 	String message = F("\n\n");
 	message += F("<html>\n");
@@ -465,11 +465,11 @@ void handleReflowNav() {
 	message += F("</html>\n");
 
 	server.send(200, "text/html", message);
-	digitalWrite(ledHTTP, 0);
+	digitalWrite(PIN_HTTP_LED, 0);
 }
 
 void handleBlank() {
-	digitalWrite(ledHTTP, 1);
+	digitalWrite(PIN_HTTP_LED, 1);
 
 	String message = "\n\n";
 	message += "<html>\n";
@@ -489,11 +489,11 @@ void handleBlank() {
 
 	server.send(200, "text/html", message);
 
-	digitalWrite(ledHTTP, 0);
+	digitalWrite(PIN_HTTP_LED, 0);
 }
 
 void handleReflowFrameset() {
-	digitalWrite(ledHTTP, 1);
+	digitalWrite(PIN_HTTP_LED, 1);
 
 	String message = "\n\n";
 
@@ -507,11 +507,11 @@ void handleReflowFrameset() {
 
 	server.send(200, "text/html", message);
 
-	digitalWrite(ledHTTP, 0);
+	digitalWrite(PIN_HTTP_LED, 0);
 }
 
 void handleJSONSensors() {
-	digitalWrite(ledHTTP, 1);
+	digitalWrite(PIN_HTTP_LED, 1);
 
 	String message = "";
 	message += "{\n";
@@ -532,12 +532,12 @@ void handleJSONSensors() {
 
 	server.send(200, "application/json", message);
 
-	digitalWrite(ledHTTP, 0);
+	digitalWrite(PIN_HTTP_LED, 0);
 
 }
 
 void handleReflowChart() {
-	digitalWrite(ledHTTP, 1);
+	digitalWrite(PIN_HTTP_LED, 1);
 
 	String message = "\n\n";
 	message += "<html>\n";
@@ -639,7 +639,7 @@ void handleReflowChart() {
 	message += "</html>\n";
 	server.send(200, "text/html", message);
 
-	digitalWrite(ledHTTP, 0);
+	digitalWrite(PIN_HTTP_LED, 0);
 
 }
 
