@@ -41,20 +41,21 @@
 // Configuration Start
 
 // These buttons are exposed on the nodemcu dev board
-const uint8_t key_user = 16; // What can we do with this button?
-const uint8_t key_flash = 0; // If pressed within 5 seconds of power on, enter admin mode
+const auto PIN_USER_INPUT = 16; // What can we do with this button?
+const auto PIN_ADMIN_MODE = 0; // If pressed within 5 seconds of power on, enter admin mode
 
-const uint8_t ledHTTP = 0;     // Toggled on HTTP Status
-const uint8_t ledCONNECTED = 2; // Toggled on when AP connected
+const auto PIN_HTTP_LED = 0;     // Toggled on HTTP Status
+const auto PIN_WIFI_LED = 2; // Toggled on when AP connected
 
-const uint8_t SSR_OUTPUT = 13; // This is where the SSR is connected
-const uint8_t ZERO_CROSSING_INPUT = 14;	// pin to sense the zero crossing
+const auto PIN_SSR_OUTPUT = 13; // This is where the SSR is connected
+const auto PIN_ZERO_CROSSING_INPUT = 14;	// pin to sense the zero crossing
+
 // Pins for thermocouples
-const auto DO = 4;
-const auto CS_A = 12;
-const auto CLK = 5;
+const auto PIN_SPI_D0 = 4;
+const auto PIN_SPI_CS_A = 12;
+const auto PIN_SPI_CLK = 5;
 
-MAX6675 thermocouple_A(CLK, CS_A, DO);
+MAX6675 thermocouple_A(PIN_SPI_CLK, PIN_SPI_CS_A, PIN_SPI_D0);
 //Jm_MAX31855 thermocouple_A(CLK, CS_A, DO);
 //Jm_MAX31855 thermocouple_B(CLK, CS_B, DO);
 
@@ -170,9 +171,9 @@ void setup() {
 	EEPROM.begin(1024); // 512 bytes should be more than enough (famous last words)
 	loadSettings();
 
-	pinMode(SSR_OUTPUT, OUTPUT);
-	pinMode(key_flash, INPUT_PULLUP);
-	pinMode(ZERO_CROSSING_INPUT, INPUT);
+	pinMode(PIN_SSR_OUTPUT, OUTPUT);
+	pinMode(PIN_ADMIN_MODE, INPUT_PULLUP);
+	pinMode(PIN_ZERO_CROSSING_INPUT, INPUT);
 
 	//-- Start PID Setup
 	windowStartTime = millis();
@@ -189,11 +190,11 @@ void setup() {
 
 	delay(5000);
 	// Set deviceAdmin to one if key_flash is depressed. Otherwise, use defaults.
-	if (digitalRead(key_flash) == 0) {
+	if (digitalRead(PIN_ADMIN_MODE) == 0) {
 		deviceAdmin = 1;
-		pinMode(key_flash, OUTPUT);
+		pinMode(PIN_ADMIN_MODE, OUTPUT);
 	} else {
-		pinMode(key_flash, OUTPUT);
+		pinMode(PIN_ADMIN_MODE, OUTPUT);
 	}
 
 	if (deviceAdmin) {
@@ -253,7 +254,7 @@ void setup() {
 				});
 		wifiManager.autoConnect();
 
-		digitalWrite(ledCONNECTED, 1);
+		digitalWrite(PIN_WIFI_LED, 1);
 
 		WiFi.printDiag(Serial);
 
@@ -346,7 +347,7 @@ void loop() {
 			} else {
 				ledHTTPState = 1;
 			}
-			digitalWrite(ledCONNECTED, ledHTTPState);
+			digitalWrite(PIN_WIFI_LED, ledHTTPState);
 		}
 
 		// If we've been in admin mode for 30 minutes, reboot ESP to get out of
@@ -388,7 +389,7 @@ void dispatchers(void) {
 void dispatchSecond(void) {
 	// We may use this for debug output
 	updateSensors();
-	logger << "[SENSOR] " <<  sensorA  << "°C" << endl;
+	logger << "[SENSOR] " << sensorA << "°C" << endl;
 	logger << "[PID] " << Power << "%" << endl;
 
 }
@@ -416,8 +417,8 @@ void zeroCrossingISR() {
 	processEnable = true;
 	Output = 25;
 	if (processEnable && d.update(Output / 10)) {
-		digitalWrite(SSR_OUTPUT, true);
+		digitalWrite(PIN_SSR_OUTPUT, true);
 		delay(1);
 	}
-	digitalWrite(SSR_OUTPUT, false);
+	digitalWrite(PIN_SSR_OUTPUT, false);
 }
