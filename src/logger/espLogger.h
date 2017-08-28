@@ -8,45 +8,66 @@
 #ifndef SRC_ESPLOGGER_H_
 #define SRC_ESPLOGGER_H_
 
-#ifdef UNIT_TESTING
-#include <iostream>
-#endif
-
 #include <logger/telnetServer.h>
+#include <functional>
+#include <string>
 
 // logging class which outputs logs to all possible sinks
 class espLogger {
 public:
-	espLogger(std::string prefix = "") :
-			prefix(prefix) {
+	espLogger(std::string prefix = "",
+			std::function<uint32_t(void)> f = nullptr) :
+			prefix(prefix), getTimestamp(f), startOfNewLine(true) {
 	}
 
-	template<class T>
-	espLogger &operator<<(const T &msg) {
-		Serial << msg;
+	espLogger& operator<<(std::string &msg) {
+		if (getTimestamp && startOfNewLine) { // prepend timeStamp
+			uint32_t timeNow = getTimestamp();
+			Serial << timeNow << delimiter.c_str();
+			telnet << timeNow << delimiter;
+			startOfNewLine = false;
+		}
+		Serial << msg.c_str();
 		telnet << msg;
+		if ((msg.substr(msg.length() - 2) == (std::string) "\n\r")
+				|| (msg.substr(msg.length() - 1) == (std::string) "\n")) {
+			startOfNewLine = true;
+		}
 		return *this;
 	}
-//	template<class T>
-//	friend Log& operator <<(Log &instance, const T& arg) {
-//		instance << "[" << instance.prefix << "] " << arg;
-////		Serial << "[" << instance.prefix << "] " << arg;
-////		log.udp << "[" << log.prefix << "] " << arg;
-//		return instance;
-//	}
-//	inline Print &operator <<(Print &stream, T arg) {
-//		return stream;
-//	}
+	espLogger& operator<<(const char* msg) {
+		if (getTimestamp && startOfNewLine) { // prepend timeStamp
+			uint32_t timeNow = getTimestamp();
+			Serial << timeNow << delimiter.c_str();
+			telnet << timeNow << delimiter;
+			startOfNewLine = false;
+		}
+		Serial << msg;
+		telnet << msg;
+		if ((msg[sizeof(msg) - 1] == '\n') || (msg[sizeof(msg) - 2] == '\n')) {
+			startOfNewLine = true;
+		}
+		return *this;
+	}
 
-//	ostream& operator <<(ostream &os, const Log& log) {
-//		Serial << "[" << prefix << "] " << param;
-////		udp << "[" << prefix << "] " << param;
-//		return log;
-//	}
+	espLogger& operator<<(const _EndLineCode arg) {
+		*this << "\n\r";
+		startOfNewLine = true;
+		return *this;
+	}
+
+	espLogger& operator<<(const int arg) {
+		Serial << arg;
+		telnet << arg;
+		startOfNewLine = false;
+		return *this;
+	}
 
 private:
 	const std::string prefix;
 	telnetServer telnet;
+	const std::function<uint32_t(void)> getTimestamp;bool startOfNewLine;
+	const std::string delimiter { ": " }; // delimiter between timestamp and message
 };
 
 #endif /* SRC_ESPLOGGER_H_ */
