@@ -11,13 +11,11 @@
 ADC_MODE(ADC_VCC);		// read internal adc
 Ticker msTicker;
 
-espLogger myLogger("", []() {return millis();});
-
 void milisecondISR() {
 	static int run;
 	run++;
 	if (!(run % 1000)) {
-		myLogger << "test " << (int) run / 1000 << endl;
+		logger << "test " << (int) run / 1000 << endl;
 	}
 }
 
