@@ -13,25 +13,8 @@
 #include <logger/telnetServer.h>
 #include <WiFiServer.h>
 #include <vector>
+#include <string>
 #include <Streaming.h>
-
-// ansi stuff, could always use printf instead of concat
-String ansiPRE = "\033"; // escape code
-String ansiHOME = "\033[H"; // cursor home
-String ansiESC = "\033[2J"; // esc
-String ansiCLC = "\033[?25l"; // invisible cursor
-
-String ansiEND = "\033[0m";   // closing tag for styles
-String ansiBOLD = "\033[1m";
-
-String ansiRED = "\033[41m"; // red background
-String ansiGRN = "\033[42m"; // green background
-String ansiBLU = "\033[44m"; // blue background
-
-String ansiREDF = "\033[31m"; // red foreground
-String ansiGRNF = "\033[34m"; // green foreground
-String ansiBLUF = "\033[32m"; // blue foreground
-String BELL = "\a";
 
 class telnetServer {
 public:
@@ -39,13 +22,11 @@ public:
 			serverInstance(port), serverClients(MAX_SERVER_CLIENTS) {
 
 		serverInstance.begin();
-		Serial << "[TLN] Starting telnet server on port " << (String) port
-				<< endl;
 		serverInstance.setNoDelay(true); // ESP BUG ?
 	}
 
 	// write to all connected clients
-	template<typename T> size_t write(const T &src) {
+	template<typename T> size_t write(const T src) {
 		//check if there are any new clients
 		if (serverInstance.hasClient()) {
 			for (auto &i : serverClients) {
@@ -75,23 +56,23 @@ public:
 		for (auto &i : serverClients) {
 			if (i && i.connected()) {
 				// sending
-				i.write(src);
+				i.print(src);
 				delay(1);
 			}
 		}
 	}
 
 	telnetServer& operator<<(const int arg) {
-		write(((String) arg).c_str());
+		write(arg);
 		return *this;
 	}
-	telnetServer& operator<<(const String& arg) {
+	telnetServer& operator<<(const std::string& arg) {
 		write(arg.c_str());
 		return *this;
 	}
 	telnetServer& operator<<(const _EndLineCode arg) {
 		// Everything is a string if you try hard enough
-		write(((String) "\n\r").c_str());
+		write(((std::string) "\n\r").c_str());
 		return *this;
 	}
 
@@ -99,6 +80,24 @@ protected:
 	static constexpr int MAX_SERVER_CLIENTS { 4 };
 	std::vector<WiFiClient> serverClients;
 	WiFiServer serverInstance;
+
+	// ansi stuff, could always use printf instead of concat
+	std::string ansiPRE = "\033"; // escape code
+	std::string ansiHOME = "\033[H"; // cursor home
+	std::string ansiESC = "\033[2J"; // esc
+	std::string ansiCLC = "\033[?25l"; // invisible cursor
+
+	std::string ansiEND = "\033[0m";   // closing tag for styles
+	std::string ansiBOLD = "\033[1m";
+
+	std::string ansiRED = "\033[41m"; // red background
+	std::string ansiGRN = "\033[42m"; // green background
+	std::string ansiBLU = "\033[44m"; // blue background
+
+	std::string ansiREDF = "\033[31m"; // red foreground
+	std::string ansiGRNF = "\033[34m"; // green foreground
+	std::string ansiBLUF = "\033[32m"; // blue foreground
+	std::string BELL = "\a";
 };
 
 #endif /* SRC_TELNETSERVER_H_ */
