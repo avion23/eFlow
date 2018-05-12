@@ -19,12 +19,12 @@
 #include <PID_v1.h>
 #include "Jm_MAX31855.h"
 #include "max6675.h"
+#include <ESP8266mDNS.h>
 
 #include <ESP8266WiFi.h>
 #include <DNSServer.h>
 #include <WiFiClient.h>
 #include <ESP8266WebServer.h>
-#include <ESP8266mDNS.h>
 
 #include <EEPROM.h>
 #include "EEPROMAnything.h"
@@ -37,24 +37,10 @@
 #include <DNSServer.h>            //Local DNS Server used for redirecting all requests to the configuration portal
 #include <ESP8266WebServer.h>     //Local WebServer used to serve the configuration portal
 #include <WiFiManager.h>          //https://github.com/tzapu/WiFiManager WiFi Configuration Magic
+#include "hardwareConfig.h"
+#include "ISR.h"
 
-// Configuration Start
-
-// These buttons are exposed on the nodemcu dev board
-const uint8_t key_user = 16; // What can we do with this button?
-const uint8_t key_flash = 0; // If pressed within 5 seconds of power on, enter admin mode
-
-const uint8_t ledHTTP = 0;     // Toggled on HTTP Status
-const uint8_t ledCONNECTED = 2; // Toggled on when AP connected
-
-const uint8_t SSR_OUTPUT = 13; // This is where the SSR is connected
-const uint8_t ZERO_CROSSING_INPUT = 14;	// pin to sense the zero crossing
-// Pins for thermocouples
-const auto DO = 4;
-const auto CS_A = 12;
-const auto CLK = 5;
-
-MAX6675 thermocouple_A(CLK, CS_A, DO);
+MAX6675 thermocouple_A(PIN_SPI_CLK, PIN_SPI_CS_A, PIN_SPI_D0);
 //Jm_MAX31855 thermocouple_A(CLK, CS_A, DO);
 //Jm_MAX31855 thermocouple_B(CLK, CS_B, DO);
 
@@ -89,12 +75,6 @@ unsigned long secretRandNumber; // We will generate a new secret on startup.
 
 const int numReadings = 5;
 int readIndex_A = 0;                // the index of the current reading
-int readIndex_B = 0;                // the index of the current reading
-
-//Input: The variable we're trying to control (double)
-//Output: The variable that will be adjusted by the pid (double)
-//Setpoint: The value we want to Input to maintain (double)
-double Setpoint, Input, Output;
 
 //Specify the links and initial tuning parameters
 //double Kp = 300, Ki = 0.05, Kd = 20;
@@ -124,7 +104,6 @@ float Power = 0;
  * 1 = Init
  * 2 = In progress
  */
-uint8_t processEnable = 0;
 
 uint16_t safeTemperature = 400; // Don't allow oven to be enabled unless it first cools to this temperature
 
@@ -170,9 +149,9 @@ void setup() {
 	EEPROM.begin(1024); // 512 bytes should be more than enough (famous last words)
 	loadSettings();
 
-	pinMode(SSR_OUTPUT, OUTPUT);
-	pinMode(key_flash, INPUT_PULLUP);
-	pinMode(ZERO_CROSSING_INPUT, INPUT);
+	pinMode(PIN_SSR_OUTPUT, OUTPUT);
+	pinMode(PIN_ADMIN_MODE, INPUT_PULLUP);
+	pinMode(PIN_INPUT_OPTOCOUPLER, INPUT);
 
 	//-- Start PID Setup
 	windowStartTime = millis();
@@ -189,11 +168,11 @@ void setup() {
 
 	delay(5000);
 	// Set deviceAdmin to one if key_flash is depressed. Otherwise, use defaults.
-	if (digitalRead(key_flash) == 0) {
+	if (digitalRead(PIN_ADMIN_MODE) == 0) {
 		deviceAdmin = 1;
-		pinMode(key_flash, OUTPUT);
+		pinMode(PIN_ADMIN_MODE, OUTPUT);
 	} else {
-		pinMode(key_flash, OUTPUT);
+		pinMode(PIN_ADMIN_MODE, OUTPUT);
 	}
 
 	if (deviceAdmin) {
@@ -214,10 +193,6 @@ void setup() {
 		Serial.print("IP address: ");
 		Serial.println(WiFi.softAPIP());
 		printAPMacAddress();
-
-		if (MDNS.begin("eflow")) {
-			Serial.println("MDNS responder started");
-		}
 
 		// We are using the amount of time required to connect to the AP as the seed to a random number generator.
 		//   We should look for other ways to improve the seed. This should be "good enough" for now.
@@ -253,17 +228,13 @@ void setup() {
 				});
 		wifiManager.autoConnect();
 
-		digitalWrite(ledCONNECTED, 1);
+		digitalWrite(PIN_WIFI_LED, 1);
 
 		WiFi.printDiag(Serial);
 
 		Serial.print("IP address: ");
 		Serial.println(WiFi.localIP());
 		printMacAddress();
-
-		if (MDNS.begin("eflow")) {
-			Serial.println("MDNS responder started");
-		}
 
 		// We are using the amount of time required to connect to the AP as the seed to a random number generator.
 		//   We should look for other ways to improve the seed. This should be "good enough" for now.
@@ -346,7 +317,7 @@ void loop() {
 			} else {
 				ledHTTPState = 1;
 			}
-			digitalWrite(ledCONNECTED, ledHTTPState);
+			digitalWrite(PIN_WIFI_LED, ledHTTPState);
 		}
 
 		// If we've been in admin mode for 30 minutes, reboot ESP to get out of
@@ -388,9 +359,8 @@ void dispatchers(void) {
 void dispatchSecond(void) {
 	// We may use this for debug output
 	updateSensors();
-	logger << "[SENSOR] " <<  sensorA  << "°C" << endl;
+	logger << "[SENSOR] " << sensorA << "°C" << endl;
 	logger << "[PID] " << Power << "%" << endl;
-
 }
 
 void dispatch100ms(void) {
@@ -401,23 +371,3 @@ void dispatch10ms(void) {
 
 }
 
-void initISR() {
-	// this should be a sine wave and is highly hardware dependend
-	// The PIN is pulled low through the optocoupler when the
-	// voltage is at it's maximum.
-	// a falling edge means that maximum is reached.
-	// a rising edge means that the maximum has just passed and we are before the zero crossing
-//	attachInterrupt(ZERO_CROSSING_INPUT, zeroCrossingISR, RISING);
-
-}
-
-void zeroCrossingISR() {
-	static deltaSigma d(100);	// convert percent to bits
-	processEnable = true;
-	Output = 25;
-	if (processEnable && d.update(Output / 10)) {
-		digitalWrite(SSR_OUTPUT, true);
-		delay(1);
-	}
-	digitalWrite(SSR_OUTPUT, false);
-}

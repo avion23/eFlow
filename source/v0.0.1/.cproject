@@ -5,13 +5,13 @@
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="0.910961921" moduleId="org.eclipse.cdt.core.settings" name="Default">
 				<externalSettings/>
 				<extensions>
-					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
 					<extension id="org.eclipse.cdt.core.VCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.CWDLocator" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
@@ -19,7 +19,7 @@
 					<folderInfo id="0.910961921." name="/" resourcePath="">
 						<toolChain id="org.eclipse.cdt.build.core.prefbase.toolchain.952979152" name="No ToolChain" resourceTypeBasedDiscovery="false" superClass="org.eclipse.cdt.build.core.prefbase.toolchain">
 							<targetPlatform binaryParser="org.eclipse.cdt.core.ELF" id="org.eclipse.cdt.build.core.prefbase.toolchain.952979152.52310970" name=""/>
-							<builder arguments="-f -c eclipse" cleanBuildTarget="run --target clean" command="platformio" id="org.eclipse.cdt.build.core.settings.default.builder.1519453406" incrementalBuildTarget="run -e esp12e" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="Gnu Make Builder" superClass="org.eclipse.cdt.build.core.settings.default.builder"/>
+							<builder arguments="-f -c eclipse" cleanBuildTarget="run --target clean" command="platformio" id="org.eclipse.cdt.build.core.settings.default.builder.1519453406" incrementalBuildTarget="run" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="Gnu Make Builder" superClass="org.eclipse.cdt.build.core.settings.default.builder"/>
 							<tool id="org.eclipse.cdt.build.core.settings.holder.libs.1409095472" name="holder for library settings" superClass="org.eclipse.cdt.build.core.settings.holder.libs"/>
 							<tool id="org.eclipse.cdt.build.core.settings.holder.1624502120" name="Assembly" superClass="org.eclipse.cdt.build.core.settings.holder">
 								<option id="org.eclipse.cdt.build.core.settings.holder.incpaths.239157887" name="Include Paths" superClass="org.eclipse.cdt.build.core.settings.holder.incpaths" valueType="includePath">
@@ -27,17 +27,30 @@
 									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/tools/sdk/lwip/include"/>
 									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/cores/esp8266"/>
 									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/variants/nodemcu"/>
+									<listOptionValue builtIn="false" value="${HOME}/Documents/programming/embedded/esp8266/eFlow/source/v0.0.1/src"/>
+									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/SPI"/>
+									<listOptionValue builtIn="false" value="${HOME}/Documents/programming/embedded/esp8266/eFlow/source/v0.0.1/lib/max31855"/>
 									<listOptionValue builtIn="false" value="${HOME}/Documents/programming/embedded/esp8266/eFlow/source/v0.0.1/.piolibdeps/PID_ID2"/>
 									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/ESP8266WiFi/src"/>
-									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/ESP8266mDNS"/>
-									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/EEPROM"/>
-									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/SPI"/>
-									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/ESP8266WebServer/src"/>
 									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/DNSServer/src"/>
+									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/ESP8266WebServer/src"/>
+									<listOptionValue builtIn="false" value="${HOME}/Documents/programming/embedded/esp8266/eFlow/source/v0.0.1/.piolibdeps/WifiManager_ID567"/>
+									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/ESP8266mDNS"/>
 									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/ArduinoOTA"/>
-									<listOptionValue builtIn="false" value="${HOME}/Documents/programming/embedded/esp8266/eFlow/source/v0.0.1/src"/>
+									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/EEPROM"/>
+									<listOptionValue builtIn="false" value="${HOME}/Documents/programming/embedded/esp8266/eFlow/source/v0.0.1/.piolibdeps/Streaming_ID560"/>
+									<listOptionValue builtIn="false" value="${HOME}/Documents/programming/embedded/esp8266/eFlow/source/v0.0.1/lib/max6675"/>
+									<listOptionValue builtIn="false" value="${HOME}/Documents/programming/embedded/esp8266/eFlow/source/v0.0.1/lib/max31855"/>
+									<listOptionValue builtIn="false" value="${HOME}/Documents/programming/embedded/esp8266/eFlow/source/v0.0.1/lib/max6675"/>
 									<listOptionValue builtIn="false" value="${HOME}/Documents/programming/embedded/esp8266/eFlow/source/v0.0.1/.piolibdeps/PID_ID2"/>
 									<listOptionValue builtIn="false" value="${HOME}/Documents/programming/embedded/esp8266/eFlow/source/v0.0.1/.piolibdeps/PID_ID2"/>
+									<listOptionValue builtIn="false" value="${HOME}/Documents/programming/embedded/esp8266/eFlow/source/v0.0.1/.piolibdeps/Streaming_ID560"/>
+									<listOptionValue builtIn="false" value="${HOME}/Documents/programming/embedded/esp8266/eFlow/source/v0.0.1/.piolibdeps/Streaming_ID560"/>
+									<listOptionValue builtIn="false" value="${HOME}/Documents/programming/embedded/esp8266/eFlow/source/v0.0.1/.piolibdeps/WifiManager_ID567"/>
+									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/ESP8266WiFi/src"/>
+									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/DNSServer/src"/>
+									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/ESP8266WebServer/src"/>
+									<listOptionValue builtIn="false" value="${HOME}/Documents/programming/embedded/esp8266/eFlow/source/v0.0.1/.piolibdeps/WifiManager_ID567"/>
 									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/ArduinoOTA"/>
 									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/DNSServer/src"/>
 									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/EEPROM"/>
@@ -61,6 +74,7 @@
 									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/Ticker"/>
 									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/Wire"/>
 									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/esp8266/src"/>
+									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/tool-unity"/>
 								</option>
 								<option id="org.eclipse.cdt.build.core.settings.holder.symbols.922107295" name="Symbols" superClass="org.eclipse.cdt.build.core.settings.holder.symbols" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="ARDUINO=20300"/>
@@ -68,31 +82,43 @@
 									<listOptionValue builtIn="false" value="F_CPU=80000000L"/>
 									<listOptionValue builtIn="false" value="__ets__"/>
 									<listOptionValue builtIn="false" value="ICACHE_FLASH"/>
-									<listOptionValue builtIn="false" value="PLATFORMIO=30300"/>
+									<listOptionValue builtIn="false" value="PLATFORMIO=30401"/>
 									<listOptionValue builtIn="false" value="ESP8266"/>
 									<listOptionValue builtIn="false" value="ARDUINO_ARCH_ESP8266"/>
 									<listOptionValue builtIn="false" value="ARDUINO_ESP8266_ESP12"/>
-									<listOptionValue builtIn="false" value="UNIT_TESTING"/>
 								</option>
 								<inputType id="org.eclipse.cdt.build.core.settings.holder.inType.149990277" languageId="org.eclipse.cdt.core.assembly" languageName="Assembly" sourceContentType="org.eclipse.cdt.core.asmSource" superClass="org.eclipse.cdt.build.core.settings.holder.inType"/>
 							</tool>
 							<tool id="org.eclipse.cdt.build.core.settings.holder.54121539" name="GNU C++" superClass="org.eclipse.cdt.build.core.settings.holder">
-								<option id="org.eclipse.cdt.build.core.settings.holder.incpaths.1096940598" name="Include Paths" superClass="org.eclipse.cdt.build.core.settings.holder.incpaths" useByScannerDiscovery="false" valueType="includePath">
+								<option id="org.eclipse.cdt.build.core.settings.holder.incpaths.1096940598" name="Include Paths" superClass="org.eclipse.cdt.build.core.settings.holder.incpaths" valueType="includePath">
 									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/tools/sdk/include"/>
 									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/tools/sdk/lwip/include"/>
 									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/cores/esp8266"/>
 									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/variants/nodemcu"/>
+									<listOptionValue builtIn="false" value="${HOME}/Documents/programming/embedded/esp8266/eFlow/source/v0.0.1/src"/>
+									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/SPI"/>
+									<listOptionValue builtIn="false" value="${HOME}/Documents/programming/embedded/esp8266/eFlow/source/v0.0.1/lib/max31855"/>
 									<listOptionValue builtIn="false" value="${HOME}/Documents/programming/embedded/esp8266/eFlow/source/v0.0.1/.piolibdeps/PID_ID2"/>
 									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/ESP8266WiFi/src"/>
-									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/ESP8266mDNS"/>
-									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/EEPROM"/>
-									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/SPI"/>
-									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/ESP8266WebServer/src"/>
 									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/DNSServer/src"/>
+									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/ESP8266WebServer/src"/>
+									<listOptionValue builtIn="false" value="${HOME}/Documents/programming/embedded/esp8266/eFlow/source/v0.0.1/.piolibdeps/WifiManager_ID567"/>
+									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/ESP8266mDNS"/>
 									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/ArduinoOTA"/>
-									<listOptionValue builtIn="false" value="${HOME}/Documents/programming/embedded/esp8266/eFlow/source/v0.0.1/src"/>
+									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/EEPROM"/>
+									<listOptionValue builtIn="false" value="${HOME}/Documents/programming/embedded/esp8266/eFlow/source/v0.0.1/.piolibdeps/Streaming_ID560"/>
+									<listOptionValue builtIn="false" value="${HOME}/Documents/programming/embedded/esp8266/eFlow/source/v0.0.1/lib/max6675"/>
+									<listOptionValue builtIn="false" value="${HOME}/Documents/programming/embedded/esp8266/eFlow/source/v0.0.1/lib/max31855"/>
+									<listOptionValue builtIn="false" value="${HOME}/Documents/programming/embedded/esp8266/eFlow/source/v0.0.1/lib/max6675"/>
 									<listOptionValue builtIn="false" value="${HOME}/Documents/programming/embedded/esp8266/eFlow/source/v0.0.1/.piolibdeps/PID_ID2"/>
 									<listOptionValue builtIn="false" value="${HOME}/Documents/programming/embedded/esp8266/eFlow/source/v0.0.1/.piolibdeps/PID_ID2"/>
+									<listOptionValue builtIn="false" value="${HOME}/Documents/programming/embedded/esp8266/eFlow/source/v0.0.1/.piolibdeps/Streaming_ID560"/>
+									<listOptionValue builtIn="false" value="${HOME}/Documents/programming/embedded/esp8266/eFlow/source/v0.0.1/.piolibdeps/Streaming_ID560"/>
+									<listOptionValue builtIn="false" value="${HOME}/Documents/programming/embedded/esp8266/eFlow/source/v0.0.1/.piolibdeps/WifiManager_ID567"/>
+									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/ESP8266WiFi/src"/>
+									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/DNSServer/src"/>
+									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/ESP8266WebServer/src"/>
+									<listOptionValue builtIn="false" value="${HOME}/Documents/programming/embedded/esp8266/eFlow/source/v0.0.1/.piolibdeps/WifiManager_ID567"/>
 									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/ArduinoOTA"/>
 									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/DNSServer/src"/>
 									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/EEPROM"/>
@@ -116,38 +142,51 @@
 									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/Ticker"/>
 									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/Wire"/>
 									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/esp8266/src"/>
+									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/tool-unity"/>
 								</option>
-								<option id="org.eclipse.cdt.build.core.settings.holder.symbols.1198905600" name="Symbols" superClass="org.eclipse.cdt.build.core.settings.holder.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
+								<option id="org.eclipse.cdt.build.core.settings.holder.symbols.1198905600" name="Symbols" superClass="org.eclipse.cdt.build.core.settings.holder.symbols" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="ARDUINO=20300"/>
 									<listOptionValue builtIn="false" value="LWIP_OPEN_SRC"/>
 									<listOptionValue builtIn="false" value="F_CPU=80000000L"/>
 									<listOptionValue builtIn="false" value="__ets__"/>
 									<listOptionValue builtIn="false" value="ICACHE_FLASH"/>
-									<listOptionValue builtIn="false" value="PLATFORMIO=30300"/>
+									<listOptionValue builtIn="false" value="PLATFORMIO=30401"/>
 									<listOptionValue builtIn="false" value="ESP8266"/>
 									<listOptionValue builtIn="false" value="ARDUINO_ARCH_ESP8266"/>
 									<listOptionValue builtIn="false" value="ARDUINO_ESP8266_ESP12"/>
-									<listOptionValue builtIn="false" value="UNIT_TESTING"/>
 								</option>
 								<inputType id="org.eclipse.cdt.build.core.settings.holder.inType.762536863" languageId="org.eclipse.cdt.core.g++" languageName="GNU C++" sourceContentType="org.eclipse.cdt.core.cxxSource,org.eclipse.cdt.core.cxxHeader" superClass="org.eclipse.cdt.build.core.settings.holder.inType"/>
 							</tool>
 							<tool id="org.eclipse.cdt.build.core.settings.holder.1310559623" name="GNU C" superClass="org.eclipse.cdt.build.core.settings.holder">
-								<option id="org.eclipse.cdt.build.core.settings.holder.incpaths.41298875" name="Include Paths" superClass="org.eclipse.cdt.build.core.settings.holder.incpaths" useByScannerDiscovery="false" valueType="includePath">
+								<option id="org.eclipse.cdt.build.core.settings.holder.incpaths.41298875" name="Include Paths" superClass="org.eclipse.cdt.build.core.settings.holder.incpaths" valueType="includePath">
 									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/tools/sdk/include"/>
 									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/tools/sdk/lwip/include"/>
 									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/cores/esp8266"/>
 									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/variants/nodemcu"/>
+									<listOptionValue builtIn="false" value="${HOME}/Documents/programming/embedded/esp8266/eFlow/source/v0.0.1/src"/>
+									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/SPI"/>
+									<listOptionValue builtIn="false" value="${HOME}/Documents/programming/embedded/esp8266/eFlow/source/v0.0.1/lib/max31855"/>
 									<listOptionValue builtIn="false" value="${HOME}/Documents/programming/embedded/esp8266/eFlow/source/v0.0.1/.piolibdeps/PID_ID2"/>
 									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/ESP8266WiFi/src"/>
-									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/ESP8266mDNS"/>
-									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/EEPROM"/>
-									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/SPI"/>
-									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/ESP8266WebServer/src"/>
 									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/DNSServer/src"/>
+									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/ESP8266WebServer/src"/>
+									<listOptionValue builtIn="false" value="${HOME}/Documents/programming/embedded/esp8266/eFlow/source/v0.0.1/.piolibdeps/WifiManager_ID567"/>
+									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/ESP8266mDNS"/>
 									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/ArduinoOTA"/>
-									<listOptionValue builtIn="false" value="${HOME}/Documents/programming/embedded/esp8266/eFlow/source/v0.0.1/src"/>
+									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/EEPROM"/>
+									<listOptionValue builtIn="false" value="${HOME}/Documents/programming/embedded/esp8266/eFlow/source/v0.0.1/.piolibdeps/Streaming_ID560"/>
+									<listOptionValue builtIn="false" value="${HOME}/Documents/programming/embedded/esp8266/eFlow/source/v0.0.1/lib/max6675"/>
+									<listOptionValue builtIn="false" value="${HOME}/Documents/programming/embedded/esp8266/eFlow/source/v0.0.1/lib/max31855"/>
+									<listOptionValue builtIn="false" value="${HOME}/Documents/programming/embedded/esp8266/eFlow/source/v0.0.1/lib/max6675"/>
 									<listOptionValue builtIn="false" value="${HOME}/Documents/programming/embedded/esp8266/eFlow/source/v0.0.1/.piolibdeps/PID_ID2"/>
 									<listOptionValue builtIn="false" value="${HOME}/Documents/programming/embedded/esp8266/eFlow/source/v0.0.1/.piolibdeps/PID_ID2"/>
+									<listOptionValue builtIn="false" value="${HOME}/Documents/programming/embedded/esp8266/eFlow/source/v0.0.1/.piolibdeps/Streaming_ID560"/>
+									<listOptionValue builtIn="false" value="${HOME}/Documents/programming/embedded/esp8266/eFlow/source/v0.0.1/.piolibdeps/Streaming_ID560"/>
+									<listOptionValue builtIn="false" value="${HOME}/Documents/programming/embedded/esp8266/eFlow/source/v0.0.1/.piolibdeps/WifiManager_ID567"/>
+									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/ESP8266WiFi/src"/>
+									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/DNSServer/src"/>
+									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/ESP8266WebServer/src"/>
+									<listOptionValue builtIn="false" value="${HOME}/Documents/programming/embedded/esp8266/eFlow/source/v0.0.1/.piolibdeps/WifiManager_ID567"/>
 									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/ArduinoOTA"/>
 									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/DNSServer/src"/>
 									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/EEPROM"/>
@@ -171,18 +210,18 @@
 									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/Ticker"/>
 									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/Wire"/>
 									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/framework-arduinoespressif8266/libraries/esp8266/src"/>
+									<listOptionValue builtIn="false" value="${HOME}/.platformio/packages/tool-unity"/>
 								</option>
-								<option id="org.eclipse.cdt.build.core.settings.holder.symbols.884639970" name="Symbols" superClass="org.eclipse.cdt.build.core.settings.holder.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
+								<option id="org.eclipse.cdt.build.core.settings.holder.symbols.884639970" name="Symbols" superClass="org.eclipse.cdt.build.core.settings.holder.symbols" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="ARDUINO=20300"/>
 									<listOptionValue builtIn="false" value="LWIP_OPEN_SRC"/>
 									<listOptionValue builtIn="false" value="F_CPU=80000000L"/>
 									<listOptionValue builtIn="false" value="__ets__"/>
 									<listOptionValue builtIn="false" value="ICACHE_FLASH"/>
-									<listOptionValue builtIn="false" value="PLATFORMIO=30300"/>
+									<listOptionValue builtIn="false" value="PLATFORMIO=30401"/>
 									<listOptionValue builtIn="false" value="ESP8266"/>
 									<listOptionValue builtIn="false" value="ARDUINO_ARCH_ESP8266"/>
 									<listOptionValue builtIn="false" value="ARDUINO_ESP8266_ESP12"/>
-									<listOptionValue builtIn="false" value="UNIT_TESTING"/>
 								</option>
 								<inputType id="org.eclipse.cdt.build.core.settings.holder.inType.549319812" languageId="org.eclipse.cdt.core.gcc" languageName="GNU C" sourceContentType="org.eclipse.cdt.core.cSource,org.eclipse.cdt.core.cHeader" superClass="org.eclipse.cdt.build.core.settings.holder.inType"/>
 							</tool>

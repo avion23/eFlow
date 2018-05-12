@@ -69,6 +69,5 @@ private:
 	const std::function<uint32_t(void)> getTimestamp;bool startOfNewLine;
 	const std::string delimiter { ": " }; // delimiter between timestamp and message
 };
-espLogger logger("", []() {return millis();}); // global instance to avoid double bind to port
 
 #endif /* SRC_ESPLOGGER_H_ */
