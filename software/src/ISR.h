@@ -7,8 +7,12 @@
 
 #ifndef SRC_ISR_H_
 #define SRC_ISR_H_
-#include <deltaSigma.hpp>
+
+#ifndef UNIT_TESTING
+
+
 #include <Arduino.h>
+#include <deltaSigma/deltaSigma.hpp>
 #include <Ticker.h>
 #include "hardwareConfig.h"
 
@@ -46,4 +50,6 @@ void ICACHE_RAM_ATTR ISROptocouplerZeroCrossing();
 
 void initISR();
 
+
+#endif
 #endif /* SRC_ISR_H_ */

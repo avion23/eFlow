@@ -19,7 +19,7 @@
 #ifndef SRC_TEST_DELTASIGMATESTWHITEBOX_HPP_
 #define SRC_TEST_DELTASIGMATESTWHITEBOX_HPP_
 
-#include "deltaSigma.hpp"
+#include <deltaSigma/deltaSigma.hpp>
 #include "doctest.h"
 #include <iostream>
 

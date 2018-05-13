@@ -17,8 +17,8 @@
 
  */
 
-#ifndef SRC_DELTASIGMA_HPP_
-#define SRC_DELTASIGMA_HPP_
+#ifndef SRC_DELTASIGMA_DELTASIGMA_HPP_
+#define SRC_DELTASIGMA_DELTASIGMA_HPP_
 /**
  * This class was intended to provide an easy way to convert a PWM / Duty cycle value
  * into a series of half ways on the AC mains power
@@ -52,4 +52,4 @@ protected:
 	static constexpr int maxDcPressure = 2; /// how many half waves in the wrong direction are allowed
 };
 
-#endif /* SRC_DELTASIGMA_HPP_ */
+#endif /* SRC_DELTASIGMA_DELTASIGMA_HPP_ */
