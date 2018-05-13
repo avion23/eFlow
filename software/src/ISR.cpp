@@ -4,10 +4,12 @@
  *  Created on: Sep 10, 2017
  *      Author: avion23
  */
+#ifndef UNIT_TESTING
 
 #include "ISR.h"
 
-Ticker delayer;	// used to delay turninig off the SSR
+
+Ticker delayer;	// used to delay turning off the SSR
 
 void ICACHE_RAM_ATTR ISRPullSSRLow() {
 	interrupts();
@@ -26,9 +28,6 @@ void ICACHE_RAM_ATTR ISRZeroCrossing() {
 	}
 }
 
-double Setpoint { 0 }; //Input: The variable we're trying to control (double)
-double Input { 0 }; //Output: The variable that will be adjusted by the pid (double)
-double Output { 0 }; //Setpoint: The value we want to Input to maintain (double)
 
 int zeroCrossingsCounter { 0 };
 
@@ -42,3 +41,5 @@ void ICACHE_RAM_ATTR initISR() {
 	attachInterrupt(digitalPinToInterrupt(PIN_INPUT_OPTOCOUPLER),
 			ISRZeroCrossing, RISING);
 }
+
+#endif

@@ -20,8 +20,8 @@
 #ifndef SRC_TEST_DELTASIGMATEST_HPP_
 #define SRC_TEST_DELTASIGMATEST_HPP_
 
+#include <deltaSigma/deltaSigma.hpp>
 #include "doctest.h"
-#include "deltaSigma.hpp"
 #include "deltaSigmaTestWhiteBox.hpp"
 
 TEST_CASE("0 percent")

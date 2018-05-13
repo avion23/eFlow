@@ -17,7 +17,7 @@
 
  */
 
-#include <deltaSigma.hpp>
+#include <deltaSigma/deltaSigma.hpp>
 
 bool deltaSigma::update(unsigned int percent) {
 	bool returnValue = false;
