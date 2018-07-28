@@ -36,7 +36,7 @@
 
 extern Ticker oneShot; // used to synchronize the zero crossing interrupt with the actual start of a new half wave
 static constexpr uint32_t Delay_MS_Zero_Crossing_Optocoupler { 0 };	/// the phases of optocoupler and power line are delayed
-static constexpr uint32_t Delay_MS_SSR_Minimum_On_Time { 3 };/// the phases of optocoupler and power line are delayed
+static constexpr uint32_t Delay_MS_SSR_Minimum_On_Time { 5 };/// the phases of optocoupler and power line are delayed
 
 extern double Setpoint; //Input: The variable we're trying to control (double)
 extern double Input; //Output: The variable that will be adjusted by the pid (double)
